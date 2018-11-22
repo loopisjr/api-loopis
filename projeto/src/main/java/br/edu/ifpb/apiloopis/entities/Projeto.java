@@ -1,5 +1,7 @@
 package br.edu.ifpb.apiloopis.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,7 @@ public class Projeto {
     private String emailContratante;
     private String descricao;
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "Funcionario_projeto",
             joinColumns = @JoinColumn(name = "emailFuncionario"),
             inverseJoinColumns = @JoinColumn(name = "idProjeto"))

@@ -36,12 +36,17 @@ public class FuncionarioController {
     public ResponseEntity<Funcionario> buscarPorEmail(@PathVariable String email) {
         Optional<Funcionario> f = service.buscarPorEmail(email);
         return (f.isPresent()) ? ResponseEntity.ok().body(f.get()) : ResponseEntity.noContent().build();
-
     }
 
     @DeleteMapping(value = "/{email}")
     public ResponseEntity<Void> deletar(@PathVariable String email) {
         service.deletar(email);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(value = "/login")
+    public ResponseEntity<Funcionario> login(@RequestBody Funcionario funcionario){
+        Funcionario buscado = service.login(funcionario);
+        return (buscado == null)?ResponseEntity.noContent().build(): ResponseEntity.ok(buscado);
     }
 }

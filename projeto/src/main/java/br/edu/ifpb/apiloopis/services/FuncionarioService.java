@@ -2,6 +2,7 @@ package br.edu.ifpb.apiloopis.services;
 
 import br.edu.ifpb.apiloopis.entities.Funcionario;
 import br.edu.ifpb.apiloopis.repositories.FuncionarioRepository;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ public class FuncionarioService {
     private FuncionarioRepository repository;
 
     public void salvar(Funcionario funcionario){
+        funcionario.setSenha(DigestUtils.md5Hex(funcionario.getSenha()));
         repository.save(funcionario);
     }
 
@@ -33,6 +35,15 @@ public class FuncionarioService {
     public Funcionario atualizar(Funcionario funcionario){
         if(buscarPorEmail(funcionario.getEmail()).isPresent()){
             return repository.save(funcionario);
+        }
+        return null;
+    }
+
+    public Funcionario login(Funcionario funcionario){
+        Funcionario buscado = buscarPorEmail(funcionario.getEmail()).get();
+        String senha = DigestUtils.md5Hex(funcionario.getSenha());
+        if(buscado != null && buscado.getSenha().equals(senha)){
+            return buscado;
         }
         return null;
     }

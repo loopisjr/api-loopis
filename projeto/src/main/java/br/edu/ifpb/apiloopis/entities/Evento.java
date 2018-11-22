@@ -1,7 +1,10 @@
 package br.edu.ifpb.apiloopis.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.Date;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,9 +15,11 @@ public class Evento {
     @GeneratedValue
     private int id;
     private String titulo;
-    private Date data;
+    private LocalDate data;
+    private String hora;
     private String descricao;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     @JoinTable(name = "Funcionario_evento",
             joinColumns = @JoinColumn(name = "emailFuncionario"),
             inverseJoinColumns = @JoinColumn(name = "idEvento"))
@@ -40,11 +45,11 @@ public class Evento {
         this.titulo = titulo;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -64,6 +69,14 @@ public class Evento {
         this.funcionariosEnvolvidos = funcionariosEnvolvidos;
     }
 
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,24 +85,14 @@ public class Evento {
         return id == evento.id &&
                 Objects.equals(titulo, evento.titulo) &&
                 Objects.equals(data, evento.data) &&
+                Objects.equals(hora, evento.hora) &&
                 Objects.equals(descricao, evento.descricao) &&
                 Objects.equals(funcionariosEnvolvidos, evento.funcionariosEnvolvidos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, titulo, data, descricao, funcionariosEnvolvidos);
-    }
-
-    @Override
-    public String toString() {
-        return "Evento{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", data=" + data +
-                ", descricao='" + descricao + '\'' +
-                ", funcionariosEnvolvidos=" + funcionariosEnvolvidos +
-                '}';
+        return Objects.hash(id, titulo, data, hora, descricao, funcionariosEnvolvidos);
     }
 }
 
