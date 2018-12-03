@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.List;
 import java.util.Objects;
+import br.edu.ifpb.apiloopis.enums.TipoFuncionario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Funcionario {
@@ -20,6 +22,7 @@ public class Funcionario {
     @ManyToMany(mappedBy = "funcionarios")
     private List<Projeto> projetos;
     @ManyToMany(mappedBy = "funcionariosEnvolvidos")
+    @JsonIgnore
     private List<Evento> eventos;
 
     public Funcionario(){}
@@ -117,4 +120,7 @@ public class Funcionario {
     public int hashCode() {
         return Objects.hash(email, senha, nome, cargo, perfilGithub, habilidades, tipo, projetos, eventos);
     }
+
+
 }
+

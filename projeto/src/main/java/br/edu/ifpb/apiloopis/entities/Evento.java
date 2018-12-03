@@ -19,7 +19,7 @@ public class Evento {
     private String hora;
     private String descricao;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonIgnore
+    //@JsonIgnore
     @JoinTable(name = "Funcionario_evento",
             joinColumns = @JoinColumn(name = "emailFuncionario"),
             inverseJoinColumns = @JoinColumn(name = "idEvento"))

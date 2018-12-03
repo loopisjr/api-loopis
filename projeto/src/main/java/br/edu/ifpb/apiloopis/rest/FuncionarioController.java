@@ -44,6 +44,7 @@ public class FuncionarioController {
         return ResponseEntity.ok().build();
     }
 
+    @CrossOrigin
     @PostMapping(value = "/login")
     public ResponseEntity<Funcionario> login(@RequestBody Funcionario funcionario){
         Funcionario buscado = service.login(funcionario);

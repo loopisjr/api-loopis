@@ -1,4 +1,4 @@
-package br.edu.ifpb.apiloopis.entities;
+package br.edu.ifpb.apiloopis.enums;
 
 public enum TipoFuncionario {
     ROOT,
