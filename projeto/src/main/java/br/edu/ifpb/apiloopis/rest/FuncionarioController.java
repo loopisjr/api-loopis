@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/funcionarios")
+@CrossOrigin(origins = "http://localhost:8100")
 public class FuncionarioController {
 
     @Autowired
@@ -44,7 +45,6 @@ public class FuncionarioController {
         return ResponseEntity.ok().build();
     }
 
-    @CrossOrigin
     @PostMapping(value = "/login")
     public ResponseEntity<Funcionario> login(@RequestBody Funcionario funcionario){
         Funcionario buscado = service.login(funcionario);
