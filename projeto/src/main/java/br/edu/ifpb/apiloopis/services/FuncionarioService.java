@@ -15,9 +15,15 @@ public class FuncionarioService {
     @Autowired
     private FuncionarioRepository repository;
 
-    public void salvar(Funcionario funcionario) {
-        funcionario.setSenha(DigestUtils.md5Hex(funcionario.getSenha()));
-        repository.save(funcionario);
+    public boolean salvar(Funcionario funcionario) {
+        if(buscarPorEmail(funcionario.getEmail()).isPresent()){
+            return false;
+        }else{
+            funcionario.setSenha(DigestUtils.md5Hex(funcionario.getSenha()));
+            repository.save(funcionario);
+            return true;
+        }
+
     }
 
     public Optional<Funcionario> buscarPorEmail(String email) {

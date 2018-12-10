@@ -19,8 +19,11 @@ public class FuncionarioController {
 
     @PostMapping
     public ResponseEntity<Void> salvar(@RequestBody Funcionario funcionario) {
-        service.salvar(funcionario);
-        return ResponseEntity.ok().build();
+        if(service.salvar(funcionario)){
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.status(202).build();
+        }
     }
 
     @GetMapping
