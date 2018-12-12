@@ -1,9 +1,6 @@
 package br.edu.ifpb.apiloopis.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 import br.edu.ifpb.apiloopis.enums.TipoFuncionario;
@@ -19,9 +16,9 @@ public class Funcionario {
     private String perfilGithub;
     private String habilidades;
     private TipoFuncionario tipo;
-    @ManyToMany(mappedBy = "funcionarios")
+    @ManyToMany(mappedBy = "funcionarios", cascade = CascadeType.ALL)
     private List<Projeto> projetos;
-    @ManyToMany(mappedBy = "funcionariosEnvolvidos")
+    @ManyToMany(mappedBy = "funcionariosEnvolvidos",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Evento> eventos;
 

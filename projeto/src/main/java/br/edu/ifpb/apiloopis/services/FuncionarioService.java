@@ -16,14 +16,13 @@ public class FuncionarioService {
     private FuncionarioRepository repository;
 
     public boolean salvar(Funcionario funcionario) {
-        if(buscarPorEmail(funcionario.getEmail()).isPresent()){
+        if (buscarPorEmail(funcionario.getEmail()).isPresent()) {
             return false;
-        }else{
+        } else {
             funcionario.setSenha(DigestUtils.md5Hex(funcionario.getSenha()));
             repository.save(funcionario);
             return true;
         }
-
     }
 
     public Optional<Funcionario> buscarPorEmail(String email) {
@@ -52,7 +51,8 @@ public class FuncionarioService {
         if (optional.isPresent()) {
             Funcionario buscado = optional.get();
             String senha = DigestUtils.md5Hex(funcionario.getSenha());
-                if (buscado != null && buscado.getSenha().equals(senha) && buscado.getTipo().equals(funcionario.getTipo())) {
+            if (buscado != null && buscado.getSenha().equals(senha) &&
+                    buscado.getTipo().equals(funcionario.getTipo())) {
                 return buscado;
             }
         }
