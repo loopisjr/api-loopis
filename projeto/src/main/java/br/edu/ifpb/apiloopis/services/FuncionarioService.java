@@ -1,6 +1,7 @@
 package br.edu.ifpb.apiloopis.services;
 
 import br.edu.ifpb.apiloopis.entities.Funcionario;
+import br.edu.ifpb.apiloopis.enums.TipoFuncionario;
 import br.edu.ifpb.apiloopis.repositories.FuncionarioRepository;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,22 @@ public class FuncionarioService {
             return repository.save(funcionario);
         }
         return null;
+    }
+
+    public void atualizarTipo(String email, TipoFuncionario tipo){
+        Optional<Funcionario> funcionario = buscarPorEmail(email);
+        if(funcionario.isPresent()){
+            funcionario.get().setTipo(tipo);
+            repository.save(funcionario.get());
+        }
+    }
+
+    public void atualizarCargo(String email, String cargo){
+        Optional<Funcionario> funcionario = buscarPorEmail(email);
+        if(funcionario.isPresent()){
+            funcionario.get().setCargo(cargo);
+            repository.save(funcionario.get());
+        }
     }
 
     public Funcionario login(Funcionario funcionario) {
