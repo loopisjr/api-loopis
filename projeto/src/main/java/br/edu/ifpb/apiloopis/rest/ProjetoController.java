@@ -1,5 +1,6 @@
 package br.edu.ifpb.apiloopis.rest;
 
+import br.edu.ifpb.apiloopis.entities.Funcionario;
 import br.edu.ifpb.apiloopis.entities.Projeto;
 import br.edu.ifpb.apiloopis.services.ProjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class ProjetoController {
     @PutMapping
     public ResponseEntity<Projeto> atualizar(@RequestBody Projeto projeto) {
         return ResponseEntity.ok().body(service.atualizar(projeto));
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Projeto> adicionarFuncionarios(@PathVariable int id, @RequestBody List<Funcionario> funcionarios){
+        return ResponseEntity.ok().body(service.adicionarFuncionarios(id,funcionarios));
     }
 
     @GetMapping(value = "/{id}")

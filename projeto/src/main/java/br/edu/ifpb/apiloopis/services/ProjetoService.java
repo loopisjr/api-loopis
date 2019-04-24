@@ -1,5 +1,6 @@
 package br.edu.ifpb.apiloopis.services;
 
+import br.edu.ifpb.apiloopis.entities.Funcionario;
 import br.edu.ifpb.apiloopis.entities.Projeto;
 import br.edu.ifpb.apiloopis.repositories.ProjetoRepository;
 import br.edu.ifpb.apiloopis.repositories.ProjetoRepository;
@@ -37,4 +38,15 @@ public class ProjetoService {
         }
         return null;
     }
+
+    public Projeto adicionarFuncionarios(int id, List<Funcionario> funcionarios){
+        Optional<Projeto> projeto = buscarPorId(id);
+        if(projeto.isPresent()){
+            projeto.get().setFuncionarios(funcionarios);
+            repository.save(projeto.get());
+            return projeto.get();
+        }
+        return null;
+    }
+
 }

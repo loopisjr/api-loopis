@@ -4,6 +4,7 @@ import br.edu.ifpb.apiloopis.entities.Funcionario;
 import br.edu.ifpb.apiloopis.enums.TipoFuncionario;
 import br.edu.ifpb.apiloopis.repositories.FuncionarioRepository;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
